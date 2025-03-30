@@ -1,0 +1,39 @@
+root_folder/
+│
+├── backend/
+│   ├── controllers.py
+│   └── models.py
+│
+├── instance/
+│   └── quiz_show.sqlite3
+│
+├── static/
+│   └── styles/
+│       └── main.css
+│
+├── templates/
+│   ├── admin_layout.html
+│   ├── user_layout.html
+│   ├── admin_dashboard.html
+│   ├── user_dashboard.html
+│   └── ... (other templates)
+│
+├── app.py
+├── README.md
+└── requirements.txt
+
+
+
+1. Core Functionalities:
+Admin Features:
+Add, edit, and delete subjects, chapters, quizzes, and questions.
+Search functionality for subjects and chapters.
+View summary charts for quiz scores.
+
+User Features:
+Attempt quizzes and view results.
+View summary charts for their quiz scores.
+
+
+To install in other systems:
+pip install -r requirements.txt
