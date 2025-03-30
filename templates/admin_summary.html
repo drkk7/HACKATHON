@@ -1,0 +1,21 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+<body class="summary-page">
+    <div class="container">
+        <h3 class="center" style="color: white;">Quiz Summary</h3>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" style="color: white;">Quiz ID vs Total Score</h5>
+                {% if plot_url %}
+                    <img src="data:image/png;base64,{{ plot_url }}" alt="Quiz ID vs Total Score" class="img-fluid">
+                {% else %}
+                    <p class="text-center" style="color: white;">No data available to display the graph.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="center mt-3">
+            <a href="{{ url_for('admin_dashboard', name=user.email) }}" class="btn btn-primary">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+{% endblock %}

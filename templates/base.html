@@ -1,0 +1,6 @@
+<nav class="navbar">
+    <a href="{{ url_for('dashboard') }}" class="{% if request.endpoint == 'dashboard' %}active{% endif %}">Dashboard</a>
+    <a href="{{ url_for('summary') }}" class="{% if request.endpoint == 'summary' %}active{% endif %}">Summary</a>
+    <span class="float-right">Welcome, {{ user.full_name }}</span>
+    <a href="{{ url_for('logout') }}" class="btn btn-danger btn-sm">Logout</a>
+</nav>

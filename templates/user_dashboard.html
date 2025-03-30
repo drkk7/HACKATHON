@@ -1,0 +1,79 @@
+{% extends "user_layout.html" %}
+{% block content %}
+    <style>
+        body {
+            background-color:rgb(21, 22, 22);
+        }
+    </style>
+    <div class="container" style="background-color:rgb(6, 11, 26);">
+        <h3 class="center">Available Quizzes</h3>
+        {% if search_text %}
+            <h4 class="center" style="color: white;">Search Results for "{{ search_text }}"</h4>
+        {% endif %}
+        {% if subjects %}
+            <div class="row">
+                {% for subject in subjects %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ subject.name }}</h5>
+                                {% for chapter in subject.chapters %}
+                                    <h6>{{ chapter.name }}</h6>
+                                    {% for quiz in chapter.quizzes %}
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h6 class="card-title">{{ quiz.name }}</h6>
+                                                <p class="card-text">Date: {{ quiz.date_of_quiz }} | Duration: {{ quiz.time_duration }}</p>
+                                                <a href="/quiz/{{ quiz.id }}/{{ user.id }}" class="btn btn-primary">Attempt Quiz</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h4 class="center">No quizzes available.</h4>
+        {% endif %}
+
+        <!-- Display search results for chapters -->
+        {% if chapters %}
+            <div class="row">
+                <h4 class="center" style="color: white;">Chapters Found</h4>
+                {% for chapter in chapters %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: white;">{{ chapter.name }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Display search results for quizzes -->
+        {% if quizzes %}
+            <div class="row">
+                <h4 class="center" style="color: white;">Quizzes Found</h4>
+                {% for quiz in quizzes %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: white;">{{ quiz.name }}</h5>
+                                <p class="card-text" style="color: white;">Date: {{ quiz.date_of_quiz }} | Duration: {{ quiz.time_duration }}</p>
+                                <a href="/quiz/{{ quiz.id }}/{{ user.id }}" class="btn btn-primary">Attempt Quiz</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="center mt-3">
+            <a href="{{ url_for('user_summary', user_id=user.id) }}" class="btn btn-secondary">Back to Summary</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "user_layout.html" %}
+{% block content %}
+<body class="welcome-page">
+    <div class="container">
+        <h3 class="center">Your Quiz Summary</h3>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Quiz ID vs Your Score</h5>
+                {% if plot_url %}
+                    <img src="data:image/png;base64,{{ plot_url }}" alt="Quiz ID vs Your Score" class="img-fluid">
+                {% else %}
+                    <p class="text-center text-danger">Error: Unable to display the graph. Please try again later.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="center mt-3">
+            <a href="{{ url_for('user_dashboard', id=user.id, name=user.full_name) }}" class="btn btn-primary">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+{% endblock %}
