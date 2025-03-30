@@ -1,0 +1,320 @@
+/* General Styles */
+body {
+    background: #add8e6; /* Light blue background for all pages */
+    font-family: 'Poppins', sans-serif; /* Modern and clean font */
+    color: #0e3d49; /* Default text color */
+    margin: 0;
+    padding: 0;
+}
+
+/* Welcome Page, Login Page, and Signup Page */
+body.welcome-page, body.login-page, body.signup-page {
+    background: #141414; /* Navy blue background for welcome, login, and signup pages */
+    color: #ffffff; /* White text for welcome, login, and signup pages */
+}
+
+/* Dashboard Page */
+body.dashboard-page {
+    background: #222a35; /* Updated to match the summary page background */
+    color: #ffffff; /* White text for dashboard page */
+    border-radius: 15px; /* Rounded corners for the dashboard window */
+}
+
+/* Dashboard and Summary Pages */
+body.dashboard-page, body.summary-page {
+    background: #222a35; /* Navy blue background for dashboard and summary pages */
+    color: #ffffff; /* White text for dashboard and summary pages */
+}
+
+/* Summary Page */
+body.summary-page {
+    background-color: #222a35; /* Black background for summary page */
+    color: #ffffff; /* White text for summary page */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #005266; /* White text for headings */
+    font-family: 'Poppins', sans-serif; /* Clean and modern font */
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 4px rgba(17, 17, 17, 0.6); /* Subtle shadow for headings */
+}
+
+h1.display-4 {
+    color: #87CEEB; /* Sky blue color for "Quiz Master" text */
+}
+
+p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #5e3d3d; /* Dark background */
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Strong shadow */
+}
+
+.navbar a {
+    color: #000000; /* Black text */
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 18px;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.navbar a:hover {
+    color: #000000; /* Black text on hover */
+    font-weight: bold; /* Make text bold on hover */
+}
+
+/* Active link styling */
+.navbar a.active {
+    color: #000000; /* Black text for active links */
+    font-weight: bold; /* Bold text for active links */
+}
+
+.navbar a.btn-danger {
+    color: #000000; /* Black text for logout button */
+}
+
+.navbar a.btn-danger:hover {
+    color: #000000; /* Black text for logout button on hover */
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.btn-primary {
+    background-color: #4caf50; /* Vibrant green */
+    color: #ffffff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #388e3c; /* Darker green on hover */
+    transform: translateY(-2px); /* Lift effect */
+}
+
+.btn-secondary {
+    background-color: #607d8b; /* Cool gray-blue */
+    color: #ffffff;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #455a64; /* Darker gray-blue on hover */
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background-color: #f44336; /* Vibrant red */
+    color: #000000; /* Black text */
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background-color: #2196f3; /* Vibrant blue */
+    color: #ffffff;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #1f2020; /* Darker blue on hover */
+    transform: translateY(-2px);
+}
+
+/* Cards */
+.card {
+    background-color: #1e1e2f; /* Dark card background */
+    border: 1px solid #3a3a4b;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Strong shadow for emphasis */
+    margin-bottom: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Enhanced shadow on hover */
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #0a0909; /* Black text */
+    text-shadow: none; /* Remove shadow */
+}
+
+.card-text {
+    color: #151616; /* Neutral gray-blue */
+    font-size: 16px;
+}
+
+/* Forms */
+.input_form {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #2a2a3b; /* Dark background for forms */
+    border: 1px solid #3a3a4b;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Strong shadow */
+}
+
+.input_form label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 16px;
+    color: #e0e0e0; /* Light text */
+}
+
+.input_form input,
+.input_form textarea,
+.input_form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #455a64;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #1e1e2f; /* Dark input background */
+    color: #e0e0e0; /* Light text */
+}
+
+.input_form input:focus,
+.input_form textarea:focus,
+.input_form select:focus {
+    border-color: #d1a35e; /* Orange focus border */
+    outline: none;
+}
+
+.input_form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background-color: #4caf50; /* Vibrant green */
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.input_form button:hover {
+    background-color: #388e3c; /* Darker green on hover */
+    transform: translateY(-2px);
+}
+
+.input_form.text-center p {
+    color: #e0d5d5; /* White text */
+}
+
+.input_form.text-center p a {
+    color: #ffffff; /* White text for "New User" and "Existing User" links */
+}
+
+/* Centered Content */
+.center {
+    text-align: center;
+    margin: 30px 0;
+    color: #ffffff; /* White text */
+}
+
+/* Footer */
+footer {
+    background-color: #121212;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Strong shadow */
+}
+
+footer a {
+    color: #f5e8e8; /* Black text */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #ff5722; /* Slightly brighter orange */
+}
+
+/* Username styling */
+.username {
+    font-weight: bold; /* Set username to bold */
+}
+
+/* Welcome text styling */
+.welcome-text .username {
+    font-weight: bold; /* Make "Welcome, [username]" bold */
+}
+
+/* Subject, Chapter, and Quiz Styles */
+.subject-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ffffff; /* White text for subject titles */
+    padding-left: 10px;
+}
+
+.chapter-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #c0c0c0; /* Light gray text for chapter titles */
+    padding-left: 20px;
+}
+
+.quiz-item {
+    padding-left: 30px;
+}
+
+.quiz-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #87CEEB; /* Sky blue text for quiz titles */
+}
+
+.quiz-details {
+    font-size: 1rem;
+    color: #d3d3d3; /* Light gray text for quiz details */
+    margin-bottom: 10px;
+}
