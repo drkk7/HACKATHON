@@ -148,7 +148,7 @@ def attempt_quiz(quiz_id, user_id):
             selected_option = request.form.get(f"question_{question.id}")
             if selected_option == question.correct_option:
                 total_score += 1
-                reward_points += 100  # Each correct answer gives 10 reward points
+                reward_points += 100  # Each correct answer gives 100 reward points
 
         # Ensure reward_points is not None
         if user.reward_points is None:
