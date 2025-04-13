@@ -9,6 +9,8 @@
 - **Problem Statement / Use Case**:  
   Create a gamified online quiz platform that incentivizes learning by rewarding users with Aptos tokens for successful quiz completion. Users can redeem these tokens for gift cards, vouchers, or premium content.
 
+![Demo Interface](image-url)
+
 - **Abstract / Problem Description**:  
   Traditional learning platforms often lack motivational tools to keep learners engaged. Our solution introduces a blockchain-integrated quiz system that offers Aptos tokens as rewards for correct answers. These tokens can be stored in the user wallet and redeemed for gift cards and vouchers. This ensures increased user engagement, learning retention, and practical value from digital learning platforms. The application also includes an admin dashboard to manage quizzes, track performance, and control educational content efficiently.
 
