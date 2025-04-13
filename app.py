@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
 from backend.models import db, User_Info, Subject
+from flask_migrate import Migrate
 
 # Initialize the Flask app
 app = Flask(__name__)
@@ -10,6 +11,7 @@ app = Flask(__name__)
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{os.path.join(BASE_DIR, 'instance', 'quiz_show.sqlite3')}"  # Absolute path to the database file
 app.config["SECRET_KEY"] = "your_secret_key"  # Required for Flask-Login
+app.secret_key = 'your_secret_key'  # Replace with a secure key
 app.debug = True  # Enable debug mode
 
 # Initialize the database
@@ -20,6 +22,9 @@ app.app_context().push()  # Push the app context for database access
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"  # Redirect to login page if not authenticated
+
+# Initialize Flask-Migrate
+migrate = Migrate(app, db)
 
 # Make `user` globally available in templates
 app.jinja_env.globals['user'] = current_user

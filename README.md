@@ -1,11 +1,18 @@
+# Quiz Application
+
+## Features
+
 ### User
-- Register and log in with secure credentials.
+- Register and log in securely.
+- Attempt quizzes and view results.
 - View progress and scores on the dashboard.
+- Redeem reward points for coupons in the wallet.
 
 ### Admin
-- Manage users, decks, and cards.
+- Add, edit, and delete subjects, chapters, quizzes, and questions.
 - View user activity and performance.
-- Perform administrative tasks like resetting user progress or deleting inactive accounts.
+- Search functionality for subjects and chapters.
+- View summary charts for quiz scores.
 
 ---
 
@@ -16,105 +23,78 @@
 - **Database**: SQLite
 - **Libraries**:
   - Flask-SQLAlchemy: Database management.
-  - Flask-RESTful: API handling.
   - Flask-Login: User session management.
-  - Datetime: Timestamping operations.
-  - Requests: Handling HTTP requests and responses.
+  - Flask-Migrate: Database migrations.
+  - Matplotlib: Data visualization for quiz summaries.
 
 ---
 
 ## Database Schema Design
 
-- **User**: One user can have many decks (many-to-many relationship).
-- **Deck**: One deck can have many cards (one-to-many relationship).
-- **Card**: Each card belongs to one deck.
-
-### Attributes:
-- **User**: `id` (Primary Key), `username`, `password`, etc.
-- **Deck**: `id` (Primary Key), `name`, `score`, `last_reviewed`, `user_id` (Foreign Key).
-- **Card**: `card_id` (Primary Key), `deck_id` (Foreign Key), `front`, `back`, etc.
-
----
-
-## API Design
-
-- **User API**:
-  - `GET`: Fetch user details, related decks, and scores.
-  - `POST`: Add new users to the database.
-- **Deck API**:
-  - `GET`: Retrieve decks for a user, including deck name, score, and last reviewed card.
-  - `POST`: Add new decks.
-- **Card API**:
-  - `GET`: Fetch cards for a specific deck, including `card_id`, `front`, and `back`.
-  - `POST`: Add new cards.
-  - `PUT`: Update existing cards.
-
----
-
-## Architecture and Features
-
-The project is organized into the following structure:
-- **Backend**:
-  - `__init__.py`, `api.py`, `models.py`, `views.py`: Core Python files for app functionality.
-  - SQLite database for persistent storage.
-- **Frontend**:
-  - Static folder: Contains images and CSS files.
-  - Templates folder: Includes HTML files for the landing page, signup, login, dashboard, and review page.
-- **App**:
-  - `app.py`: Main application file.
-
-### Key Routes:
-- `/dashboard`: User dashboard.
-- `/`: Landing page.
-- `/review/<deck>`: Review cards in a deck.
-- `/review/<deck>/<card_id>`: Review a specific card.
-- `/login`: User login.
-- `/register`: User registration.
-- `/logout`: User logout.
+- **User_Info**: Stores user details, including reward points.
+- **Subject**: Represents subjects with related chapters.
+- **Chapter**: Represents chapters with related quizzes.
+- **Quiz**: Represents quizzes with related questions and scores.
+- **Question**: Stores quiz questions and options.
+- **Score**: Tracks user scores for quizzes.
 
 ---
 
 ## Installation
 
-1. Set up a virtual environment:
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
+   ```
+
+2. Set up a virtual environment:
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
-2. Install dependencies:
+
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-3. Creating a VENV:
+
+4. Run database migrations:
    ```bash
-   python -m venv venv
-   venv\scripts\activate
+   flask db upgrade
    ```
-4. Run the application:
+
+5. Start the application:
    ```bash
    python app.py
    ```
 
 ---
 
-## Demo
+## Key Routes
 
-- **Login/Signup**: Secure user authentication.
-- **CRUD Operations**: Create, update, and delete decks and cards.
-- **Dashboard**: View progress and scores.
-- **Flashcard Review**: Hover over cards to see the back side.
+### User
+- `/dashboard`: User dashboard.
+- `/summary`: User quiz summary.
+- `/wallet/<user_id>`: View and redeem reward points.
+
+### Admin
+- `/admin/<name>`: Admin dashboard.
+- `/add_subject`, `/add_chapter`, `/add_quiz`, `/add_question`: Add entities.
+- `/edit_subject`, `/edit_chapter`, `/edit_quiz`, `/edit_question`: Edit entities.
+- `/admin_summary`: View quiz performance summary.
 
 ---
 
-## Author
+## Demo
 
-**Student Name**: Karthik Kalleti  
-**Roll Num**: 23f2001791  
-**Email**: 23f2001791@ds.study.iitm.ac.in  
-**Video Link**: https://drive.google.com/file/d/1p3UNjBSFtMLuM85bWRdfP1nK56ZM6GQS/view?usp=sharing
+- **Login/Signup**: Secure user authentication.
+- **Quiz Attempt**: Answer questions and earn reward points.
+- **Wallet**: Redeem points for coupons.
+- **Admin Panel**: Manage subjects, chapters, quizzes, and questions.
 
 ---
 
 ## Reflection
 
-This project was an enjoyable learning experience. Overcoming challenges during development brought immense satisfaction. It helped me strengthen my skills in Flask, RESTful APIs, SQLAlchemy, and frontend technologies.
+This project provided an opportunity to learn and implement a full-stack web application. It strengthened skills in Flask, SQLAlchemy, and frontend technologies while integrating features like user authentication, data visualization, and reward systems.

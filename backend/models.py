@@ -13,6 +13,7 @@ class User_Info(db.Model, UserMixin):
     full_name = db.Column(db.String, nullable=False)
     address = db.Column(db.String, nullable=False)
     pin_code = db.Column(db.Integer, nullable=False)
+    reward_points = db.Column(db.Integer, default=0)  # New column for reward points
     scores = db.relationship("Score", cascade="all,delete", backref="user", lazy=True)
 
 # Subject model

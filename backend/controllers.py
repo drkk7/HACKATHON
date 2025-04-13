@@ -143,10 +143,18 @@ def attempt_quiz(quiz_id, user_id):
 
     if request.method == "POST":
         total_score = 0
+        reward_points = 0  # Initialize reward points
         for question in questions:
             selected_option = request.form.get(f"question_{question.id}")
             if selected_option == question.correct_option:
                 total_score += 1
+                reward_points += 100  # Each correct answer gives 10 reward points
+
+        # Ensure reward_points is not None
+        if user.reward_points is None:
+            user.reward_points = 0
+
+        user.reward_points += reward_points  # Add reward points to the user's wallet
         score = Score(user_id=user_id, quiz_id=quiz_id, total_scored=total_score, time_stamp_of_attempt=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         db.session.add(score)
         db.session.commit()
@@ -356,3 +364,63 @@ def user_summary(user_id):
 
     print("DEBUG: Graph generated successfully.")
     return render_template("user_summary.html", plot_url=plot_url, user=user)
+
+@app.route("/wallet/<user_id>")
+@login_required
+def wallet(user_id):
+    user = User_Info.query.get(user_id)
+    return render_template("wallet.html", reward_points=user.reward_points)
+
+@app.route("/redeem_points/<user_id>", methods=["POST"])
+@login_required
+def redeem_points(user_id):
+    user = User_Info.query.get(user_id)
+    if user.reward_points is None:
+        user.reward_points = 0
+
+    coupons = []  # Initialize an empty list for coupons
+
+    if user.reward_points >= 100:  # Set a minimum threshold for redemption
+        user.reward_points -= 100  # Deduct 100 points for redemption
+        db.session.commit()
+        message = "Successfully redeemed 100 points!"
+
+        # Fetch available coupons based on remaining points
+        if user.reward_points >= 200:
+            coupons.append("10% off on Amazon purchases")
+        if user.reward_points >= 500:
+            coupons.append("₹100 Flipkart voucher")
+        if user.reward_points >= 1000:
+            coupons.append("₹50 mobile recharge coupon")
+    else:
+        message = "Not enough points to redeem. You need at least 100 points."
+
+    return render_template("wallet.html", reward_points=user.reward_points, message=message, coupons=coupons)
+
+@app.route("/redeem_coupon/<user_id>/<coupon>", methods=["POST"])
+@login_required
+def redeem_coupon(user_id, coupon):
+    user = User_Info.query.get(user_id)
+    if user.reward_points is None:
+        user.reward_points = 0
+
+    # Define the points required for each coupon
+    coupon_points = {
+        "amazon": 1000,
+        "flipkart": 500,
+        "recharge": 750,
+        "shopping": 3000
+    }
+
+    if coupon in coupon_points:
+        required_points = coupon_points[coupon]
+        if user.reward_points >= required_points:
+            user.reward_points -= required_points
+            db.session.commit()
+            message = f"Successfully redeemed {coupon.capitalize()} coupon!"
+        else:
+            message = f"Not enough points to redeem {coupon.capitalize()} coupon. You need {required_points} points."
+    else:
+        message = "Invalid coupon selected."
+
+    return redirect(url_for("wallet", user_id=user_id, message=message))

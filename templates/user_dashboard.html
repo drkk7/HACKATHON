@@ -4,76 +4,188 @@
         body {
             background-color:rgb(21, 22, 22);
         }
+        h3 {
+            color: #ffffff; /* Changed the text color of the heading to white */
+        }
+        .dashboard-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        nav {
+            position: fixed; /* Fixed position to keep navbar always visible */
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure navbar is above all other elements */
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1); /* Slightly transparent white */
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px); /* Glassy effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1); /* Slightly transparent white */
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            padding: 20px;
+            backdrop-filter: blur(10px); /* Glassy effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
     </style>
-    <div class="container" style="background-color:rgb(6, 11, 26);">
-        <h3 class="center">Available Quizzes</h3>
-        {% if search_text %}
-            <h4 class="center" style="color: white;">Search Results for "{{ search_text }}"</h4>
-        {% endif %}
-        {% if subjects %}
-            <div class="row">
-                {% for subject in subjects %}
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ subject.name }}</h5>
-                                {% for chapter in subject.chapters %}
-                                    <h6>{{ chapter.name }}</h6>
-                                    {% for quiz in chapter.quizzes %}
-                                        <div class="card mb-3">
-                                            <div class="card-body">
-                                                <h6 class="card-title">{{ quiz.name }}</h6>
-                                                <p class="card-text">Date: {{ quiz.date_of_quiz }} | Duration: {{ quiz.time_duration }}</p>
-                                                <a href="/quiz/{{ quiz.id }}/{{ user.id }}" class="btn btn-primary">Attempt Quiz</a>
+
+    <video class="video-background" autoplay loop muted>
+        <source src="{{ url_for('static', filename='videos/ls.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="content">
+        <div class="container">
+            <h3 class="center">
+                <i class="fas fa-book"></i> Available Quizzes <!-- Added Subjects Icon -->
+            </h3>
+            {% if search_text %}
+                <h4 class="center" style="color: white;">Search Results for "{{ search_text }}"</h4>
+            {% endif %}
+            {% if subjects %}
+                <div class="row">
+                    {% for subject in subjects %}
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-book-open"></i> {{ subject.name }} <!-- Added Book Icon -->
+                                    </h5>
+                                    {% for chapter in subject.chapters %}
+                                        <h6>
+                                            <i class="fas fa-list"></i> {{ chapter.name }} <!-- Added Chapters Icon -->
+                                        </h6>
+                                        {% for quiz in chapter.quizzes %}
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">
+                                                        <i class="fas fa-question-circle"></i> {{ quiz.name }} <!-- Added Quiz Icon -->
+                                                    </h6>
+                                                    <p class="card-text">Date: {{ quiz.date_of_quiz }} | Duration: {{ quiz.time_duration }}</p>
+                                                    <a href="/quiz/{{ quiz.id }}/{{ user.id }}" class="btn btn-primary">
+                                                        <i class="fas fa-play"></i> Attempt Quiz <!-- Added Play Icon -->
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        {% endfor %}
                                     {% endfor %}
-                                {% endfor %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <h4 class="center">No quizzes available.</h4>
-        {% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h4 class="center">
+                    <i class="fas fa-exclamation-circle"></i> No quizzes available. <!-- Added Warning Icon -->
+                </h4>
+            {% endif %}
 
-        <!-- Display search results for chapters -->
-        {% if chapters %}
-            <div class="row">
-                <h4 class="center" style="color: white;">Chapters Found</h4>
-                {% for chapter in chapters %}
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title" style="color: white;">{{ chapter.name }}</h5>
+            <!-- Display search results for chapters -->
+            {% if chapters %}
+                <div class="row">
+                    <h4 class="center" style="color: white;">
+                        <i class="fas fa-folder"></i> Chapters Found <!-- Added Folder Icon -->
+                    </h4>
+                    {% for chapter in chapters %}
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: white;">
+                                        <i class="fas fa-folder"></i> {{ chapter.name }} <!-- Added Folder Icon -->
+                                    </h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-        <!-- Display search results for quizzes -->
-        {% if quizzes %}
-            <div class="row">
-                <h4 class="center" style="color: white;">Quizzes Found</h4>
-                {% for quiz in quizzes %}
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title" style="color: white;">{{ quiz.name }}</h5>
-                                <p class="card-text" style="color: white;">Date: {{ quiz.date_of_quiz }} | Duration: {{ quiz.time_duration }}</p>
-                                <a href="/quiz/{{ quiz.id }}/{{ user.id }}" class="btn btn-primary">Attempt Quiz</a>
+            <!-- Display search results for quizzes -->
+            {% if quizzes %}
+                <div class="row">
+                    <h4 class="center" style="color: white;">
+                        <i class="fas fa-question-circle"></i> Quizzes Found <!-- Added Quiz Icon -->
+                    </h4>
+                    {% for quiz in quizzes %}
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: white;">
+                                        <i class="fas fa-question-circle"></i> {{ quiz.name }} <!-- Added Quiz Icon -->
+                                    </h5>
+                                    <p class="card-text" style="color: white;">Date: {{ quiz.date_of_quiz }} | Duration: {{ quiz.time_duration }}</p>
+                                    <a href="/quiz/{{ quiz.id }}/{{ user.id }}" class="btn btn-primary">
+                                        <i class="fas fa-play"></i> Attempt Quiz <!-- Added Play Icon -->
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-        <div class="center mt-3">
-            <a href="{{ url_for('user_summary', user_id=user.id) }}" class="btn btn-secondary">Back to Summary</a>
+            <div class="center mt-3">
+                <a href="{{ url_for('user_summary', user_id=user.id) }}" class="btn btn-secondary">Back to Summary</a>
+            </div>
         </div>
     </div>
 {% endblock %}

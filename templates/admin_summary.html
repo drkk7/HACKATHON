@@ -1,9 +1,16 @@
 {% extends "admin_layout.html" %}
 {% block content %}
 <body class="summary-page">
-    <div class="container">
+    <video class="video-background" autoplay loop muted>
+        <source src="{{ url_for('static', filename='videos/ls.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="container glass-card mt-4"> <!-- Applied glass effect to main container -->
         <h3 class="center" style="color: white;">Quiz Summary</h3>
-        <div class="card">
+        <div class="card glass-card"> <!-- Applied glass effect -->
             <div class="card-body">
                 <h5 class="card-title" style="color: white;">Quiz ID vs Total Score</h5>
                 {% if plot_url %}
@@ -17,5 +24,35 @@
             <a href="{{ url_for('admin_dashboard', name=user.email) }}" class="btn btn-primary">Back to Dashboard</a>
         </div>
     </div>
+
+    <style>
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            z-index: -1;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+            backdrop-filter: blur(10px); /* Glassy effect */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+    </style>
 </body>
 {% endblock %}

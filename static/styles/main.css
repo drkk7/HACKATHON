@@ -39,7 +39,7 @@ body.summary-page {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #005266; /* White text for headings */
+    color: #f4f7f8; /* White text for headings */
     font-family: 'Poppins', sans-serif; /* Clean and modern font */
     margin-bottom: 20px;
     text-shadow: 1px 1px 4px rgba(17, 17, 17, 0.6); /* Subtle shadow for headings */

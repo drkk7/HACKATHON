@@ -1,12 +1,63 @@
 {% extends "user_layout.html" %}
 {% block content %}
-    <div class="container">
-        <h3 class="center" style="color: black;">Quiz Results</h3>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title" style="color: black;">Quiz ID: {{ quiz_id }}</h5>
-                <p class="card-text" style="color: black;">Your Score: {{ score }}/{{ total }}</p>
-                <a href="/user/{{user.id}}/{{user.full_name}}" class="btn btn-primary">Back to Dashboard</a>
+    <style>
+        nav {
+            position: fixed; /* Fixed position to keep navbar always visible */
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure navbar is above all other elements */
+        }
+
+        .results-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Ensure background is below all other elements */
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            z-index: 0; /* Ensure it doesn't block navbar */
+        }
+
+        .content {
+            position: relative;
+            z-index: 1; /* Ensure content is above the overlay */
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1); /* Slightly transparent white */
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px); /* Glassy effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+        }
+    </style>
+
+    <img src="{{ url_for('static', filename='images/results.jpg') }}" alt="Results Background" class="results-background">
+
+    <div class="overlay"></div>
+
+    <div class="content">
+        <div class="container">
+            <h3 class="center" style="color: black;">Quiz Results</h3>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: black;">Quiz ID: {{ quiz_id }}</h5>
+                    <p class="card-text" style="color: black;">Your Score: {{ score }}/{{ total }}</p>
+                    <a href="/user/{{user.id}}/{{user.full_name}}" class="btn btn-primary">Back to Dashboard</a>
+                </div>
             </div>
         </div>
     </div>
